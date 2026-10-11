@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, query, login = faker.internet.userName()}) {
+export default function({faker, query, login = faker.internet.username()}) {
   console.debug("metrics/compute/mocks > mocking graphql api result > sponsors/default")
   return /after: "MOCKED_CURSOR"/m.test(query)
     ? ({
@@ -17,7 +17,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
           nodes: new Array(10).fill(null).map(_ => ({
             privacyLevel: faker.helpers.arrayElement(["PUBLIC", "PRIVATE"]),
             sponsorEntity: {
-              login: faker.internet.userName(),
+              login: faker.internet.username(),
               avatarUrl: null,
             },
             tier: {

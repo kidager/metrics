@@ -10,7 +10,7 @@ export default async function({faker}, target, that, [{owner, repo}]) {
       "x-oauth-scopes": "repo",
     },
     data: new Array(40 + faker.number.int(60)).fill(null).map(() => ({
-      login: faker.internet.userName(),
+      login: faker.internet.username(),
       avatar_url: null,
       contributions: faker.number.int(1000),
     })),

@@ -19,13 +19,13 @@ export default async function({faker}, target, that, [{page, per_page, owner, re
           message: faker.lorem.sentence(),
           author: {
             name: owner,
-            login: faker.internet.userName(),
+            login: faker.internet.username(),
             avatar_url: null,
             date: `${faker.date.recent({days: 14})}`,
           },
           committer: {
             name: owner,
-            login: faker.internet.userName(),
+            login: faker.internet.username(),
             avatar_url: null,
             date: `${faker.date.recent({days: 14})}`,
           },

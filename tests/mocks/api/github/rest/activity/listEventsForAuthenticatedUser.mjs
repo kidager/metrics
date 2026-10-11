@@ -53,7 +53,7 @@ export default async function({faker}, target, that, [{username: login, page, pe
             title: faker.lorem.sentence(),
             number: 1,
             user: {
-              login: faker.internet.userName(),
+              login: faker.internet.username(),
             },
             body: "",
           },
@@ -182,7 +182,7 @@ export default async function({faker}, target, that, [{username: login, page, pe
             locked: false,
             title: faker.lorem.sentence(),
             user: {
-              login: faker.internet.userName(),
+              login: faker.internet.username(),
             },
           },
         },
@@ -319,7 +319,7 @@ export default async function({faker}, target, that, [{username: login, page, pe
         },
         payload: {
           member: {
-            login: faker.internet.userName(),
+            login: faker.internet.username(),
           },
           action: "added",
         },

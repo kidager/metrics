@@ -5,7 +5,6 @@ const fs = require("fs")
 const path = require("path")
 const url = require("url")
 const axios = require("axios")
-const faker = require("@faker-js/faker").faker
 const ejs = require("ejs")
 
 //GitHub action
@@ -43,15 +42,6 @@ web.stop = async () => await web.instance.kill("SIGKILL")
 require("./../source/app/web/statics/embed/app.placeholder.js")
 const placeholder = globalThis.placeholder
 delete globalThis.placeholder
-placeholder.init({
-  faker,
-  ejs,
-  axios: {
-    async get(url) {
-      return axios.get(`http://localhost:3000${url}`)
-    },
-  },
-})
 placeholder.run = async vars => {
   const options = Object.fromEntries(Object.entries(vars).map(([key, value]) => [key.replace(/^plugin_/, "").replace(/_/g, "."), value]))
   const enabled = Object.fromEntries(Object.entries(vars).filter(([key]) => /^plugin_[a-z]+$/.test(key)))
@@ -69,6 +59,17 @@ placeholder.run = async vars => {
 
 //Setup
 beforeAll(async () => {
+  //Faker is ESM only (requires --experimental-vm-modules)
+  const {faker} = await import("@faker-js/faker")
+  placeholder.init({
+    faker,
+    ejs,
+    axios: {
+      async get(url) {
+        return axios.get(`http://localhost:3000${url}`)
+      },
+    },
+  })
   //Clean community template
   await fs.promises.rm(path.join(__dirname, "../source/templates/@classic"), {recursive: true, force: true})
   //Start web instance

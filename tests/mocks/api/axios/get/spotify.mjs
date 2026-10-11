@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, url, options, login = faker.internet.userName()}) {
+export default function({faker, url, options, login = faker.internet.username()}) {
   //Spotify api
   if (/^https:..api.spotify.com.*$/.test(url)) {
     //Get recently played tracks
@@ -24,17 +24,17 @@ export default function({faker, url, options, login = faker.internet.userName()}
                   images: [
                     {
                       height: 640,
-                      url: faker.image.urlLoremFlickr({category: "abstract"}),
+                      url: faker.image.url(),
                       width: 640,
                     },
                     {
                       height: 300,
-                      url: faker.image.urlLoremFlickr({category: "abstract"}),
+                      url: faker.image.url(),
                       width: 300,
                     },
                     {
                       height: 64,
-                      url: faker.image.urlLoremFlickr({category: "abstract"}),
+                      url: faker.image.url(),
                       width: 64,
                     },
                   ],
@@ -81,17 +81,17 @@ export default function({faker, url, options, login = faker.internet.userName()}
                 images: [
                   {
                     height: 640,
-                    url: faker.image.urlLoremFlickr({category: "abstract"}),
+                    url: faker.image.url(),
                     width: 640,
                   },
                   {
                     height: 300,
-                    url: faker.image.urlLoremFlickr({category: "abstract"}),
+                    url: faker.image.url(),
                     width: 300,
                   },
                   {
                     height: 64,
-                    url: faker.image.urlLoremFlickr({category: "abstract"}),
+                    url: faker.image.url(),
                     width: 64,
                   },
                 ],
@@ -126,17 +126,17 @@ export default function({faker, url, options, login = faker.internet.userName()}
               images: [
                 {
                   height: 640,
-                  url: faker.image.urlLoremFlickr({category: "abstract"}),
+                  url: faker.image.url(),
                   width: 640,
                 },
                 {
                   height: 300,
-                  url: faker.image.urlLoremFlickr({category: "abstract"}),
+                  url: faker.image.url(),
                   width: 300,
                 },
                 {
                   height: 64,
-                  url: faker.image.urlLoremFlickr({category: "abstract"}),
+                  url: faker.image.url(),
                   width: 64,
                 },
               ],

@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, url, body, login = faker.internet.userName()}) {
+export default function({faker, url, body, login = faker.internet.username()}) {
   if (/^https:..leetcode.com.graphql.*$/.test(url)) {
     const {query} = body
     //Languages query

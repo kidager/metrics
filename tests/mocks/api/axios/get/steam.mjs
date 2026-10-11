@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, url, options, login = faker.internet.userName()}) {
+export default function({faker, url, options, login = faker.internet.username()}) {
   // App details
   if (/^https:..store.steampowered.com.api.appdetails*$/.test(url)) {
     console.debug(`metrics/compute/mocks > mocking steam api result > ${url}`)
@@ -1555,7 +1555,7 @@ export default function({faker, url, options, login = faker.internet.userName()}
                 "steamid": "0",
                 "communityvisibilitystate": 3,
                 "profilestate": 1,
-                "personaname": faker.internet.userName(),
+                "personaname": faker.internet.username(),
                 "commentpermission": 2,
                 "profileurl": "https://steamcommunity.com/id",
                 "avatar": null,

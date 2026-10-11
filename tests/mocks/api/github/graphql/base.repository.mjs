@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, query, login = faker.internet.userName()}) {
+export default function({faker, query, login = faker.internet.username()}) {
   console.debug("metrics/compute/mocks > mocking graphql api result > base/repository")
   return ({
     user: {
@@ -13,13 +13,13 @@ export default function({faker, query, login = faker.internet.userName()}) {
         stargazers: {totalCount: faker.number.int(10000)},
         languages: {
           edges: [
-            {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-            {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-            {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-            {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-            {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-            {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-            {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
+            {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+            {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+            {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+            {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+            {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+            {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+            {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
           ],
         },
         issues_open: {totalCount: faker.number.int(100)},

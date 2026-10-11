@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, url, options, login = faker.internet.userName()}) {
+export default function({faker, url, options, login = faker.internet.username()}) {
   //Stackoverflow api
   if (/^https:..api.stackexchange.com.2.2.*$/.test(url)) {
     //Extract user id
@@ -19,7 +19,7 @@ export default function({faker, url, options, login = faker.internet.userName()}
               question_count: faker.number.int(1000),
               view_count: faker.number.int(10000),
               creation_date: faker.date.past(),
-              display_name: faker.internet.userName(),
+              display_name: faker.internet.username(),
               user_id,
               reputation: faker.number.int(100000),
             },
@@ -48,7 +48,7 @@ export default function({faker, url, options, login = faker.internet.userName()}
         data: {
           items: new Array(pagesize).fill(null).map(_ => ({
             tags: new Array(5).fill(null).map(_ => faker.lorem.slug()),
-            owner: {display_name: faker.internet.userName()},
+            owner: {display_name: faker.internet.username()},
             is_answered: faker.datatype.boolean(),
             view_count: faker.number.int(10000),
             accepted_answer_id: faker.number.int(1000000),
@@ -77,7 +77,7 @@ export default function({faker, url, options, login = faker.internet.userName()}
         status: 200,
         data: {
           items: new Array(pagesize).fill(null).map(_ => ({
-            owner: {display_name: faker.internet.userName()},
+            owner: {display_name: faker.internet.username()},
             link: faker.internet.url(),
             is_accepted: faker.datatype.boolean(),
             score: faker.number.int(1000),

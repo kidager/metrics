@@ -26,23 +26,23 @@ export default async function({faker}, target, that, args) {
         sha: "MOCKED_SHA",
         commit: {
           author: {
-            name: faker.internet.userName(),
+            name: faker.internet.username(),
             email: faker.internet.email(),
             date: `${faker.date.recent({days: 7})}`,
           },
           committer: {
-            name: faker.internet.userName(),
+            name: faker.internet.username(),
             email: faker.internet.email(),
             date: `${faker.date.recent({days: 7})}`,
           },
           url: "https://api.github.com/repos/lowlighter/metrics/commits/MOCKED_SHA",
         },
         author: {
-          login: faker.internet.userName(),
+          login: faker.internet.username(),
           id: faker.number.int(100000000),
         },
         committer: {
-          login: faker.internet.userName(),
+          login: faker.internet.username(),
           id: faker.number.int(100000000),
         },
         files: [

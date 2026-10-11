@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, query, login = faker.internet.userName()}) {
+export default function({faker, query, login = faker.internet.username()}) {
   console.debug("metrics/compute/mocks > mocking graphql api result > achievements/organizations")
   return ({
     organization: {
@@ -7,7 +7,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
         nodes: [
           {
             createdAt: faker.date.recent(),
-            nameWithOwner: `${faker.internet.userName()}/${faker.lorem.slug()}`,
+            nameWithOwner: `${faker.internet.username()}/${faker.lorem.slug()}`,
           },
         ],
         totalCount: faker.number.int(100),
@@ -16,7 +16,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
         nodes: [
           {
             createdAt: faker.date.recent(),
-            nameWithOwner: `${faker.internet.userName()}/${faker.lorem.slug()}`,
+            nameWithOwner: `${faker.internet.username()}/${faker.lorem.slug()}`,
           },
         ],
         totalCount: faker.number.int(100),
