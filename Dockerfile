@@ -9,11 +9,12 @@ RUN ln -s ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
   && ln -s ../lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
 
 # Puppeteer uses the system Chrome installed below
+ENV DEBIAN_FRONTEND=noninteractive
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 ENV PUPPETEER_BROWSER_PATH=google-chrome-stable
 
 # Install Chrome, fonts to support major charsets, deno for miscellaneous scripts,
-# ruby for the github licensed gem and python for node-gyp
+# ruby for the github licensed gem (with its native gems from apt) and python for node-gyp
 # Based on https://pptr.dev/troubleshooting#running-puppeteer-in-docker
 RUN apt-get update \
   && apt-get install -y --no-install-recommends wget gnupg ca-certificates curl unzip \
@@ -22,7 +23,7 @@ RUN apt-get update \
   && apt-get update \
   && apt-get install -y --no-install-recommends google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 libx11-xcb1 libxtst6 lsb-release \
   && curl -fsSL https://deno.land/install.sh | DENO_INSTALL=/usr/local sh -s -- --yes --no-modify-path \
-  && apt-get install -y ruby-full git g++ make cmake pkg-config libssl-dev python3 xz-utils patch \
+  && apt-get install -y --no-install-recommends ruby-full ruby-rugged ruby-nokogiri git g++ make python3 \
   && gem install licensed \
   && rm -rf /var/lib/apt/lists/*
 
