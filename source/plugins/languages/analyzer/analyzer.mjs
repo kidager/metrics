@@ -2,7 +2,7 @@
 import fs from "fs/promises"
 import os from "os"
 import paths from "path"
-import git from "simple-git"
+import { simpleGit as git } from "simple-git"
 import { filters } from "../../../app/metrics/utils.mjs"
 import * as core from "@actions/core"
 

@@ -1,6 +1,6 @@
 //Imports
 import fs from "fs"
-import yaml from "js-yaml"
+import * as yaml from "js-yaml"
 import { marked } from "marked"
 import path from "path"
 import url from "url"

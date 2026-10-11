@@ -2,9 +2,9 @@
 import ejs from "ejs"
 import fss from "fs"
 import fs from "fs/promises"
-import yaml from "js-yaml"
+import * as yaml from "js-yaml"
 import paths from "path"
-import sgit from "simple-git"
+import { simpleGit as sgit } from "simple-git"
 import url from "url"
 import metadata from "../../source/app/metrics/metadata.mjs"
 
