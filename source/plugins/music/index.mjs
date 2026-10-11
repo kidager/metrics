@@ -131,7 +131,7 @@ export default async function({login, imports, data, q, account}, {enabled = fal
                   name: tr.querySelector("h3").innerText,
                   artist: tr.querySelector("h4").innerText,
                   //Spotify doesn't provide artworks so we fallback on playlist artwork instead
-                  artwork: window.getComputedStyle(document.querySelector("div[style^='--image-src:']") ?? null)?.backgroundImage.match(/^url\("(?<url>https:...+)"\)$/)?.groups?.url ?? null,
+                  artwork: (element => element ? window.getComputedStyle(element).backgroundImage.match(/^url\("(?<url>https:...+)"\)$/)?.groups?.url ?? null : null)(document.querySelector("div[style^='--image-src:']")),
                 }))
               ),
             ]
