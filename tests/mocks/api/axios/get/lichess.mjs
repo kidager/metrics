@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, url, options, login = faker.internet.userName()}) {
+export default function({faker, url, options, login = faker.internet.username()}) {
   //Wakatime api
   if (/^https:..lichess.org.api.games.user.*$/.test(url)) {
     console.debug(`metrics/compute/mocks > mocking lichess api result > ${url}`)

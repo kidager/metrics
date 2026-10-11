@@ -10,7 +10,7 @@ export default async function({faker}, target, that, [{username}]) {
       "x-oauth-scopes": "repo",
     },
     data: {
-      login: faker.internet.userName(),
+      login: faker.internet.username(),
       avatar_url: null,
       contributions: faker.number.int(1000),
     },

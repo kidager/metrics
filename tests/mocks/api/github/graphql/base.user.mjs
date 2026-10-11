@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, query, login = faker.internet.userName()}) {
+export default function({faker, query, login = faker.internet.username()}) {
   console.debug("metrics/compute/mocks > mocking graphql api result > base/user")
   return ({
     user: {
@@ -7,7 +7,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
       name: faker.person.fullName(),
       login,
       createdAt: `${faker.date.past({years: 10})}`,
-      avatarUrl: faker.image.urlLoremFlickr({category: "people"}),
+      avatarUrl: faker.image.avatar(),
       websiteUrl: faker.internet.url(),
       twitterUsername: login,
     },

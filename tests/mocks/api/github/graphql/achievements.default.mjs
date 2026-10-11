@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, query, login = faker.internet.userName()}) {
+export default function({faker, query, login = faker.internet.username()}) {
   console.debug("metrics/compute/mocks > mocking graphql api result > achievements/metrics")
   return ({
     user: {
@@ -7,7 +7,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
         nodes: [
           {
             createdAt: faker.date.recent(),
-            nameWithOwner: `${faker.internet.userName()}/${faker.lorem.slug()}`,
+            nameWithOwner: `${faker.internet.username()}/${faker.lorem.slug()}`,
           },
         ],
         totalCount: faker.number.int(100),
@@ -16,7 +16,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
         nodes: [
           {
             createdAt: faker.date.recent(),
-            nameWithOwner: `${faker.internet.userName()}/${faker.lorem.slug()}`,
+            nameWithOwner: `${faker.internet.username()}/${faker.lorem.slug()}`,
           },
         ],
         totalCount: faker.number.int(100),
@@ -29,7 +29,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
           {
             createdAt: faker.date.recent(),
             title: faker.lorem.sentence(),
-            repository: {nameWithOwner: `${faker.internet.userName()}/${faker.lorem.slug()}`},
+            repository: {nameWithOwner: `${faker.internet.username()}/${faker.lorem.slug()}`},
           },
         ],
         totalCount: faker.number.int(50000),
@@ -42,7 +42,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
               pullRequest: {
                 title: faker.lorem.sentence(),
                 number: faker.number.int(1000),
-                repository: {nameWithOwner: `${faker.internet.userName()}/${faker.lorem.slug()}`},
+                repository: {nameWithOwner: `${faker.internet.username()}/${faker.lorem.slug()}`},
               },
             },
           ],

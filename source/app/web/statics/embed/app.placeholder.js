@@ -137,7 +137,7 @@
             tweets: {
               username: options["tweets.user"] || "(attached Twitter account)",
               profile: {
-                profile_image_url: faker.image.urlLoremFlickr({category: "people"}),
+                profile_image_url: faker.image.avatar(),
                 name: "",
                 verified: false,
                 id: faker.number.int(1000000).toString(),
@@ -426,7 +426,7 @@
               sections: options["sponsors.sections"].split(",").map(x => x.trim()),
               about: "A new way to contribute to open source",
               list: new Array(Number(faker.number.int(40))).fill(null).map(_ => ({
-                login: faker.internet.userName(),
+                login: faker.internet.username(),
                 amount: faker.number.int(10),
                 avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcOnfpfwAGfgLYttYINwAAAABJRU5ErkJggg==",
                 past: faker.datatype.boolean(),
@@ -465,7 +465,7 @@
               sections: options["sponsorships.sections"].split(",").map(x => x.trim()),
               amount: faker.number.int(1000),
               list: new Array(2 + faker.number.int(8)).fill(null).map(_ => ({
-                login: faker.internet.userName(),
+                login: faker.internet.username(),
                 avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcOnfpfwAGfgLYttYINwAAAABJRU5ErkJggg==",
                 type: "user",
                 tier: `$${faker.number.int(100) * 10} per month`,
@@ -504,8 +504,8 @@
                 files: faker.number.int(1000),
                 days: Number(options["languages.recent.days"]),
               },
-              favorites: distribution(options["languages.limit"] || 8).map((value, index, array) => ({name: (index + 1 === array.length) && (options["languages.other"]) ? "Other" : faker.lorem.word(), color: faker.internet.color(), value, size: faker.number.int(1000000), x: array.slice(0, index).reduce((a, b) => a + b, 0)})),
-              recent: distribution(options["languages.limit"] || 8).map((value, index, array) => ({name: (index + 1 === array.length) && (options["languages.other"]) ? "Other" : faker.lorem.word(), color: faker.internet.color(), value, size: faker.number.int(1000000), x: array.slice(0, index).reduce((a, b) => a + b, 0)})),
+              favorites: distribution(options["languages.limit"] || 8).map((value, index, array) => ({name: (index + 1 === array.length) && (options["languages.other"]) ? "Other" : faker.lorem.word(), color: faker.color.rgb(), value, size: faker.number.int(1000000), x: array.slice(0, index).reduce((a, b) => a + b, 0)})),
+              recent: distribution(options["languages.limit"] || 8).map((value, index, array) => ({name: (index + 1 === array.length) && (options["languages.other"]) ? "Other" : faker.lorem.word(), color: faker.color.rgb(), value, size: faker.number.int(1000000), x: array.slice(0, index).reduce((a, b) => a + b, 0)})),
               get verified() {
                 return options["languages.indepth"] ? {signature: faker.number.int(this.commits)} : null
               },
@@ -617,7 +617,7 @@
                 ...(Object.fromEntries(types.map(type => [
                   type,
                   new Array(Number(options["people.limit"])).fill(null).map(_ => ({
-                    login: faker.internet.userName(),
+                    login: faker.internet.username(),
                     avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcOnfpfwAGfgLYttYINwAAAABJRU5ErkJggg==",
                   })),
                 ]))),
@@ -849,7 +849,7 @@
                     },
                     stargazerCount: faker.number.int(10000),
                     licenseInfo: {nickname: null, name: "License"},
-                    primaryLanguage: {color: faker.internet.color(), name: faker.lorem.word()},
+                    primaryLanguage: {color: faker.color.rgb(), name: faker.lorem.word()},
                   },
                   starred: `${i + 2} days ago`,
                 })),
@@ -895,7 +895,7 @@
                 },
                 stargazerCount: faker.number.int(10000),
                 licenseInfo: {nickname: null, name: "License"},
-                primaryLanguage: {color: faker.internet.color(), name: faker.lorem.word()},
+                primaryLanguage: {color: faker.color.rgb(), name: faker.lorem.word()},
               })),
             },
           })
@@ -1044,7 +1044,7 @@
                 level: faker.number.int(100),
                 avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcOnfpfwAGfgLYttYINwAAAABJRU5ErkJggg==",
                 created: faker.date.recent({days: 10}).getTime(),
-                name: faker.internet.userName(),
+                name: faker.internet.username(),
               },
               games: {
                 count: 2,
@@ -1170,7 +1170,7 @@
                 Event: "Casual Correspondence game",
                 Date: faker.date.recent().toISOString().substring(0, 10),
                 White: options["chess.user"],
-                Black: faker.internet.userName(),
+                Black: faker.internet.username(),
                 WhiteElo: faker.number.int(3000),
                 BlackElo: faker.number.int(3000),
               },

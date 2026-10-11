@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, url, options, login = faker.internet.userName()}) {
+export default function({faker, url, options, login = faker.internet.username()}) {
   //Last.fm api
   if (/^https:..ws.audioscrobbler.com.*$/.test(url)) {
     //Get recently played tracks
@@ -33,19 +33,19 @@ export default function({faker, url, options, login = faker.internet.userName()}
                 image: [
                   {
                     size: "small",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                   {
                     size: "medium",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                   {
                     size: "large",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                   {
                     size: "extralarge",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                 ],
                 streamable: "0",
@@ -86,19 +86,19 @@ export default function({faker, url, options, login = faker.internet.userName()}
                 image: [
                   {
                     size: "small",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                   {
                     size: "medium",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                   {
                     size: "large",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                   {
                     size: "extralarge",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                 ],
                 url: faker.internet.url(),
@@ -113,7 +113,7 @@ export default function({faker, url, options, login = faker.internet.userName()}
     else if (/user.gettopartists/.test(url)) {
       console.debug(`metrics/compute/mocks > mocking lastfm api result > ${url}`)
       const artist = faker.lorem.word()
-      const playcount = faker.random.number()
+      const playcount = faker.number.int()
       return ({
         status: 200,
         data: {
@@ -130,19 +130,19 @@ export default function({faker, url, options, login = faker.internet.userName()}
                 image: [
                   {
                     size: "small",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                   {
                     size: "medium",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                   {
                     size: "large",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                   {
                     size: "extralarge",
-                    "#text": faker.image.urlLoremFlickr({category: "abstract"}),
+                    "#text": faker.image.url(),
                   },
                 ],
                 streamable: "0",

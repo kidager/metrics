@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, url, options, login = faker.internet.userName()}) {
+export default function({faker, url, options, login = faker.internet.username()}) {
   //Wakatime api
   if (/^https:..wakatime.com.api.v1.users..*.stats.*$/.test(url)) {
     //Get user profile

@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, query, login = faker.internet.userName()}) {
+export default function({faker, query, login = faker.internet.username()}) {
   console.debug("metrics/compute/mocks > mocking graphql api result > base/repositories")
   return /after: "MOCKED_CURSOR"/m.test(query)
     ? ({
@@ -32,13 +32,13 @@ export default function({faker, query, login = faker.internet.userName()}) {
               owner: {login},
               languages: {
                 edges: [
-                  {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-                  {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-                  {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-                  {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-                  {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-                  {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
-                  {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},
+                  {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+                  {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+                  {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+                  {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+                  {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+                  {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
+                  {size: faker.number.int(100000), node: {color: faker.color.rgb(), name: faker.lorem.word()}},
                 ],
               },
               issues_open: {totalCount: faker.number.int(100)},

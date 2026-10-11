@@ -1,5 +1,5 @@
 /**Mocked data */
-export default function({faker, query, login = faker.internet.userName()}) {
+export default function({faker, query, login = faker.internet.username()}) {
   console.debug("metrics/compute/mocks > mocking graphql api result > sponsorships/all")
   return /after: "MOCKED_CURSOR"/m.test(query)
     ? ({
@@ -23,7 +23,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
             },
             privacyLevel: "PUBLIC",
             sponsorable: {
-              login: faker.internet.userName(),
+              login: faker.internet.username(),
               avatarUrl: null,
             },
           })),

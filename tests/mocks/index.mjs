@@ -46,7 +46,7 @@ export default async function({graphql, rest}) {
       apply(target, that, args) {
         //Arguments
         const [query] = args
-        const login = query.match(/login: "(?<login>.*?)"/)?.groups?.login ?? faker.internet.userName()
+        const login = query.match(/login: "(?<login>.*?)"/)?.groups?.login ?? faker.internet.username()
 
         //Search for mocked query
         for (const mocked of Object.keys(mocks.github.graphql)) {
