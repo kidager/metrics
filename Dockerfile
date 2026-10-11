@@ -1,5 +1,12 @@
+# Node.js from the official image, on an Ubuntu base
+FROM node:26-trixie-slim AS node
+
 # Base image
-FROM node:24-bookworm-slim
+FROM ubuntu:26.04
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+RUN ln -s ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
+  && ln -s ../lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
 
 # Puppeteer uses the system Chrome installed below
 ENV PUPPETEER_SKIP_DOWNLOAD=true
