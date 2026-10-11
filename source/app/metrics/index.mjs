@@ -1,5 +1,6 @@
 //Imports
 import ejs from "ejs"
+import { XMLValidator } from "fast-xml-parser"
 import util from "util"
 import * as utils from "./utils.mjs"
 
@@ -209,19 +210,10 @@ export default async function metrics({login, q}, {graphql, rest, plugins, conf,
     //Verify svg
     if ((verify) && (imports.metadata.plugins.core.extras("verify", {...conf.settings, error: false}))) {
       console.debug(`metrics/compute/${login} > verify SVG`)
-      let libxmljs = null
-      try {
-        libxmljs = (await import("libxmljs2")).default
-      }
-      catch (error) {
-        console.debug(`metrics/compute/${login} > failed to import libxmljs2 (${error}), ignoring SVG verification`)
-      }
-      if (!libxmljs) {
-        const parsed = libxmljs.parseXml(rendered)
-        if (parsed.errors.length)
-          throw new Error(`Malformed SVG : \n${parsed.errors.join("\n")}`)
-        console.debug(`metrics/compute/${login} > verified SVG, no parsing errors found`)
-      }
+      const parsed = XMLValidator.validate(rendered)
+      if (parsed !== true)
+        throw new Error(`Malformed SVG : \n${parsed.err.msg} (line ${parsed.err.line}, column ${parsed.err.col})`)
+      console.debug(`metrics/compute/${login} > verified SVG, no parsing errors found`)
     }
     //Resizing
     const {resized, mime} = await imports.svg.resize(rendered, {paddings: q["config.padding"] || conf.settings.padding, convert: convert === "svg" ? null : convert, scripts: [...data.postscripts, extras.js || null].filter(x => x)})
