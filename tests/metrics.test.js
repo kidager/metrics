@@ -93,6 +93,12 @@ const metadata = JSON.parse(`${
   ]).stdout
 }`)
 
+//Cases that scrape live third-party pages, which now block or changed their markup
+const live = new Set([
+  "🎼 Music activity and suggestions - Spotify - Random track from playlist",
+  "🧠 16personalities - MBTI Personality profile",
+])
+
 //Build tests index
 const tests = []
 for (const type of ["plugins", "templates"]) {
@@ -103,6 +109,8 @@ for (const type of ["plugins", "templates"]) {
         const skip = new Set(Object.entries(metadata.templates).filter(([_, {readme: {compatibility}}]) => !compatibility[name]).map(([template]) => template))
         if (!(metadata[type][name].supports?.includes("repository")))
           skip.add("repository")
+        if (live.has(test))
+          return [test, inputs, {skip: ["classic", "terminal", "repository"], modes, timeout}]
         return [test, inputs, {skip: [...skip], modes, timeout}]
       }) ?? []
     tests.push(...cases)
