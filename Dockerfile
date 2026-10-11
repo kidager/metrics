@@ -11,13 +11,13 @@ RUN ln -s ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
 # Puppeteer uses the system Chrome installed below
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PUPPETEER_SKIP_DOWNLOAD=true
-ENV PUPPETEER_BROWSER_PATH=google-chrome-stable
+ENV PUPPETEER_BROWSER_PATH=/usr/bin/google-chrome-stable
 
 # Install Chrome, fonts to support major charsets, deno for miscellaneous scripts,
 # ruby for the github licensed gem (with its native gems from apt) and python for node-gyp
 # Based on https://pptr.dev/troubleshooting#running-puppeteer-in-docker
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends wget gnupg ca-certificates curl unzip \
+  && apt-get install -y --no-install-recommends libatomic1 wget gnupg ca-certificates curl unzip \
   && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg \
   && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
   && apt-get update \
