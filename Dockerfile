@@ -15,7 +15,7 @@ RUN apt-get update \
   && apt-get update \
   && apt-get install -y --no-install-recommends google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 libx11-xcb1 libxtst6 lsb-release \
   && curl -fsSL https://deno.land/install.sh | DENO_INSTALL=/usr/local sh -s -- --yes --no-modify-path \
-  && apt-get install -y ruby-full git g++ make cmake pkg-config libssl-dev python3 \
+  && apt-get install -y ruby-full git g++ make cmake pkg-config libssl-dev python3 xz-utils patch \
   && gem install licensed \
   && rm -rf /var/lib/apt/lists/*
 
