@@ -12,7 +12,8 @@ import fss from "fs"
 import fs from "fs/promises"
 import { JSDOM } from "jsdom"
 import linguist from "linguist-js"
-import { marked } from "marked"
+import { Marked } from "marked"
+import { markedHighlight } from "marked-highlight"
 import { minimatch } from "minimatch"
 import opengraph from "open-graph-scraper"
 import os from "os"
@@ -26,7 +27,7 @@ import readline from "readline"
 import htmlsanitize from "sanitize-html"
 import sharp from "sharp"
 import git from "simple-git"
-import SVGO from "svgo"
+import * as SVGO from "svgo"
 import url from "url"
 import util from "util"
 import xmlformat from "xml-formatter"
@@ -50,7 +51,7 @@ export const puppeteer = {
       ignoreDefaultArgs: ["--disable-extensions"],
     })
   },
-  headless: "new",
+  headless: true,
   events: ["load", "domcontentloaded", "networkidle2"],
 }
 
@@ -283,10 +284,15 @@ export function highlight(code, lang) {
   return lang in prism.languages ? prism.highlight(code, prism.languages[lang]) : code
 }
 
+/**Markdown parser (with code highlighting) */
+const marked = new Marked(markedHighlight({highlight}))
+
 /**Markdown-html sanitizer-interpreter */
 export async function markdown(text, {mode = "inline", codelines = Infinity} = {}) {
   //Sanitize user input once to prevent injections and parse into markdown
-  let rendered = await marked.parse(htmlunescape(htmlsanitize(text)), {highlight, silent: true, xhtml: true})
+  let rendered = await marked.parse(htmlunescape(htmlsanitize(text)), {silent: true})
+  //Self-close void elements, as the output is embedded in SVG (marked dropped its xhtml option)
+  rendered = rendered.replace(/<(?<tag>br|hr|img|input)(?<attributes>(?:\s[^>]*?)?)\s*\/?>/g, "<$<tag>$<attributes> />")
   //Markdown mode
   switch (mode) {
     case "inline": {
@@ -587,7 +593,7 @@ export const svg = {
     //Convert if required
     if (convert) {
       console.debug(`metrics/svg/resize > convert to ${convert}`)
-      resized = await page.screenshot({type: convert, clip: {x: 0, y: 0, width, height}, omitBackground: true})
+      resized = Buffer.from(await page.screenshot({type: convert, clip: {x: 0, y: 0, width, height}, omitBackground: true}))
       mime = `image/${convert}`
     }
     //Result
@@ -716,20 +722,17 @@ export const svg = {
         console.debug("metrics/svg/optimize/svg > this feature require experimental feature flag --optimize-svg")
         return rendered
       }
-      const {error, data: optimized} = await SVGO.optimize(rendered, {
+      const {data: optimized} = SVGO.optimize(rendered, {
         multipass: true,
-        plugins: SVGO.extendDefaultPlugins([
+        plugins: [
+          //Force CSS style consistency (removeViewBox is no longer part of the default preset)
+          {name: "preset-default", params: {overrides: {inlineStyles: false}}},
           //Additional cleanup
-          {name: "cleanupListOfValues"},
-          {name: "removeRasterImages"},
-          {name: "removeScriptElement"},
-          //Force CSS style consistency
-          {name: "inlineStyles", active: false},
-          {name: "removeViewBox", active: false},
-        ]),
+          "cleanupListOfValues",
+          "removeRasterImages",
+          "removeScripts",
+        ],
       })
-      if (error)
-        throw new Error(`Could not optimize SVG: \n${error}`)
       return optimized
     },
   },
@@ -745,7 +748,7 @@ export async function record({page, width, height, frames, scale = 1, quality = 
   //Register images frames
   const images = []
   for (let i = 0; i < frames; i++) {
-    images.push(await page.screenshot({type: "png", clip: {width, height, x, y}, omitBackground: background}))
+    images.push(Buffer.from(await page.screenshot({type: "png", clip: {width, height, x, y}, omitBackground: background})))
     await wait(delay / 1000)
     if (i % 10 === 0)
       console.debug(`metrics/record > processed ${i}/${frames} frames`)
@@ -774,7 +777,7 @@ export async function gif({page, width, height, frames, x = 0, y = 0, repeat = t
     encoder.setQuality(quality)
     //Register frames
     for (let i = 0; i < frames; i++) {
-      const buffer = new PNG(await page.screenshot({clip: {width, height, x, y}}))
+      const buffer = new PNG(Buffer.from(await page.screenshot({clip: {width, height, x, y}})))
       encoder.addFrame(await new Promise(solve => buffer.decode(pixels => solve(pixels))))
       if (frames % 10 === 0)
         console.debug(`metrics/puppeteergif > processed ${i}/${frames} frames`)
