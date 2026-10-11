@@ -40,4 +40,5 @@ jobs:
           tags: metrics:ci
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - run: docker run --rm --entrypoint="" metrics:ci npm run test-metrics
+      # Offline, so the tests only rely on mocked data
+      - run: docker run --rm --network none --entrypoint="" metrics:ci npm run test-metrics

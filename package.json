@@ -78,6 +78,7 @@
   "jest": {
     "testEnvironment": "node",
     "testTimeout": 60000,
+    "maxConcurrency": 4,
     "transform": {}
   },
   "optionalDependencies": {

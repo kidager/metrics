@@ -73,12 +73,14 @@ beforeAll(async () => {
   //Clean community template
   await fs.promises.rm(path.join(__dirname, "../source/templates/@classic"), {recursive: true, force: true})
   //Start web instance
-  await web.start()
+  if (process.env.METRICS_TEST_WEB)
+    await web.start()
 })
 //Teardown
 afterAll(async () => {
   //Stop web instance
-  await web.stop()
+  if (process.env.METRICS_TEST_WEB)
+    await web.stop()
   //Clean community template
   await fs.promises.rm(path.join(__dirname, "../source/templates/@classic"), {recursive: true, force: true})
 })
@@ -128,11 +130,14 @@ describe("GitHub Action", () =>
       if ((skip.includes(template)) || ((modes.length) && (!modes.includes("action"))))
         test.skip(name, () => null)
       else
-        test(name, async () => expect(await action.run({template, base: "", query: JSON.stringify(query), plugins_errors_fatal: true, dryrun: true, use_mocked_data: true, verify: true, retries: 1, ...input})).toBe(true), timeout)
+        test.concurrent(name, async () => expect(await action.run({template, base: "", query: JSON.stringify(query), plugins_errors_fatal: true, dryrun: true, use_mocked_data: true, verify: true, retries: 1, ...input})).toBe(true), timeout)
     }
   }))
 
-describe("Web instance", () =>
+//The web instance is not used by the action, its suites only run with METRICS_TEST_WEB=1
+const describeWeb = process.env.METRICS_TEST_WEB ? describe : describe.skip
+
+describeWeb("Web instance", () =>
   describe.each([
     ["classic", {}],
     ["terminal", {}],
@@ -146,7 +151,7 @@ describe("Web instance", () =>
     }
   }))
 
-describe("Web instance (placeholder)", () =>
+describeWeb("Web instance (placeholder)", () =>
   describe.each([
     ["classic", {}],
     ["terminal", {}],
