@@ -116,7 +116,7 @@ export default async function({login, data, imports, q, rest, account}, {enabled
             value += size
           }
           //dprint-ignore-next-line
-          languages[section].push({name:"Other", value, size:value, get lines() { return missed.lines }, set lines(_) { }, x:0}) //eslint-disable-line brace-style, no-empty-function, max-statements-per-line
+          languages[section].push({name:"Other", value, size:value, get lines() { return missed.lines }, set lines(_) { }, x:0}) //eslint-disable-line @stylistic/brace-style, no-empty-function, @stylistic/max-statements-per-line
         }
       }
       const visible = {total: Object.values(languages[section]).map(({size}) => size).reduce((a, b) => a + b, 0)}
