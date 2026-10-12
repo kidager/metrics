@@ -153,7 +153,7 @@ export function formatters({timeZone} = {}) {
         if ((descriptions) && (descriptions[status]))
           message += ` (${descriptions[status]})`
         else {
-          const description = error.response?.data?.errors?.[0]?.message ?? error.response.data?.error_description ?? error.response?.data?.message ?? null
+          const description = error.response?.data?.errors?.[0]?.message ?? error.response?.data?.error_description ?? error.response?.data?.message ?? null
           if (description)
             message += ` (${description})`
         }
