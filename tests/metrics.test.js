@@ -101,6 +101,25 @@ const live = new Set([
   "🧠 16personalities - MBTI Personality profile",
 ])
 
+//Cases that still reach the network with mocked data, skipped when the tests run offline
+const online = new Set([
+  "🏆 Achievements - Compact display",
+  "🏆 Achievements - Detailed display",
+  "🎼 Music activity and suggestions - Apple Music - Random track from playlist",
+  "🎼 Music activity and suggestions - Youtube Music - Random track from playlist",
+  "✒️ Recent posts - Recent posts",
+  "✒️ Recent posts - Recent posts with descriptions and cover images",
+  "📜 Repository licenses - Licenses and permissions",
+  "🗨️ Stack Overflow - Top answers from stackoverflow",
+  "💫 Star lists - Featured star list",
+  "💫 Star lists - Featured star list languages",
+  "📌 Starred topics - Icons",
+  "📌 Starred topics - Labels",
+  "🕹️ Steam - Profile and detailed game history",
+  "🕹️ Steam - Recently played games",
+  "📸 Website screenshot - XKCD of the day",
+])
+
 //Build tests index
 const tests = []
 for (const type of ["plugins", "templates"]) {
@@ -111,7 +130,7 @@ for (const type of ["plugins", "templates"]) {
         const skip = new Set(Object.entries(metadata.templates).filter(([_, {readme: {compatibility}}]) => !compatibility[name]).map(([template]) => template))
         if (!(metadata[type][name].supports?.includes("repository")))
           skip.add("repository")
-        if (live.has(test))
+        if ((live.has(test)) || ((process.env.METRICS_TEST_OFFLINE) && (online.has(test))))
           return [test, inputs, {skip: ["classic", "terminal", "repository"], modes, timeout}]
         return [test, inputs, {skip: [...skip], modes, timeout}]
       }) ?? []
