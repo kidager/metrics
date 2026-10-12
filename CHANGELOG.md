@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.35.1](https://github.com/kidager/metrics/compare/v3.35.0...v3.35.1) (2026-10-12)
+
+
+### Bug Fixes
+
+* **action:** detect released versions without expr ([728aca5](https://github.com/kidager/metrics/commit/728aca57b3aebdbfb813f8da46ebc188ec5688cf))
+* **plugins/lines:** skip the stats delay on mocked data ([23c888c](https://github.com/kidager/metrics/commit/23c888c883882f48c5f9a6af5667aa152abf6319))
+
 ## [3.35.0](https://github.com/kidager/metrics/compare/v3.34.0...v3.35.0) (2026-10-11)
 
 
