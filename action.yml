@@ -1556,9 +1556,10 @@ runs:
           # Use registry with pre-built images
           if [[ ! $METRICS_USE_PREBUILT_IMAGE =~ ^([Ff]alse|[Oo]ff|[Nn]o|0)$ ]]; then
             # Is released version
-            set +e
-            METRICS_IS_RELEASED=$(expr $(expr match $METRICS_VERSION .*-beta) == 0)
-            set -e
+            METRICS_IS_RELEASED=1
+            if [[ $METRICS_VERSION == *-beta* ]]; then
+              METRICS_IS_RELEASED=0
+            fi
             echo "Is released version: $METRICS_IS_RELEASED"
             if [[ "$METRICS_IS_RELEASED" -eq "0" ]]; then
               METRICS_TAG="$METRICS_TAG-beta"
